@@ -5,7 +5,6 @@ namespace Assets.Scripts
     public class Movement : MonoBehaviour
     {
         private Rigidbody2D Blob;
-        private int THRUST = 10;
         private int JUMPFORCE = 145;
         private int MAXVERTICALSPEED = 25;
         private bool _grounded;
@@ -26,7 +25,7 @@ namespace Assets.Scripts
             float VerticalAx = Input.GetAxisRaw("Vertical");
 
             //Horizontal Move
-            Utils.ApplyVelocity(Blob, HorizontalAx * THRUST, VerticalAx * THRUST);
+            Utils.ApplyVelocity(Blob, HorizontalAx * Constants.PLAYER_SPEED, VerticalAx * Constants.PLAYER_SPEED);
             //Vertical Move
             //ApplyVelocity(Blob, VerticalAx * THRUST);
 

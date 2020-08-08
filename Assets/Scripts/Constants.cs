@@ -1,13 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Assets.Utility
+﻿namespace Assets.Utility
 {
     public class Constants
     {
-        public static float DEFAULT_SPEED = 10;
+        #region Speeds
+        public static float PLAYER_SPEED = 10;
+        public static float BULLET_SPEED = 5;
+        #endregion
+
+        #region Lifetimes
+        public static float BULLET_LIFETIME = 2;
+        #endregion
     }
 }

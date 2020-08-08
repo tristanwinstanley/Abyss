@@ -12,7 +12,7 @@ namespace Assets.Scripts
         {
             bulletRB = GetComponent<Rigidbody2D>();
             bulletTransform = GetComponent<Transform>();
-            Utils.ApplyVelocity(bulletRB, x: Constants.DEFAULT_SPEED);
+            Utils.ApplyVelocity(bulletRB, x: Constants.BULLET_SPEED);
         }
 
         // Update is called once per frame

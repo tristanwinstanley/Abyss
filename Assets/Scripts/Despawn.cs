@@ -5,14 +5,20 @@ namespace Assets.Scripts
 {
     public class Despawn : MonoBehaviour
     {
-        private Rigidbody2D bulletRB;
-        private Transform bulletTransform;
+        float timezero;
+
         // Start is called before the first frame update
         void Start()
         {
-            bulletRB = GetComponent<Rigidbody2D>();
-            bulletTransform = GetComponent<Transform>();
-            Utils.ApplyVelocity(bulletRB, x: Constants.DEFAULT_SPEED);
+            timezero = Time.timeSinceLevelLoad;
+        }
+
+        void Update()
+        {
+            //Destroy once BULLET_LIFETIME is reached
+            if (Time.timeSinceLevelLoad - timezero > Constants.BULLET_LIFETIME)
+                Destroy(gameObject);
+            
         }
     }
 }
