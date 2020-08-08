@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Assets.Utility;
+using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
@@ -24,7 +25,7 @@ public class Movement : MonoBehaviour
         float VerticalAx = Input.GetAxisRaw("Vertical");
 
         //Horizontal Move
-        ApplyVelocity(Blob, HorizontalAx * THRUST, VerticalAx * THRUST);
+        Utility.ApplyVelocity(Blob, HorizontalAx * THRUST, VerticalAx * THRUST);
         //Vertical Move
         //ApplyVelocity(Blob, VerticalAx * THRUST);
 
@@ -51,20 +52,10 @@ public class Movement : MonoBehaviour
     private void CapVerticalPlayerSpeed()
     {
         if (Blob.velocity.y > MAXVERTICALSPEED)
-            ApplyVelocity(Blob, y: MAXVERTICALSPEED);
+            Utility.ApplyVelocity(Blob, y: MAXVERTICALSPEED);
         else if (Blob.velocity.y < -MAXVERTICALSPEED)
-            ApplyVelocity(Blob, y: -MAXVERTICALSPEED);
+            Utility.ApplyVelocity(Blob, y: -MAXVERTICALSPEED);
 
-    }
-    private void ApplyVelocity(Rigidbody2D rb, float x = 0f, float y = 0f)
-    {
-        // if x or y is 0, use previous velocity, i.e don't change
-        //if (x == 0f)
-        //    x = rb.velocity.x;
-        //if (y == 0f)
-        //    y = rb.velocity.y;
-        
-        rb.velocity = new Vector2(x, y);
     }
 }
 

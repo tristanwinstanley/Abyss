@@ -1,32 +1,24 @@
-﻿using System.Collections;
+﻿using Assets.Utility;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using C = Assets.Utility.Constants;
 public class AutoMove : MonoBehaviour
 {
-    private Rigidbody2D bullet;
+    private Rigidbody2D bulletRB;
     private Transform bulletTransform;
     // Start is called before the first frame update
     void Start()
     {
-        bullet = GetComponent<Rigidbody2D>();
+        bulletRB = GetComponent<Rigidbody2D>();
         bulletTransform = GetComponent<Transform>();
+        Utility.ApplyVelocity(bulletRB, x: C.DEFAULT_SPEED);
     }
 
     // Update is called once per frame
     void Update()
     {
-        bulletTransform.position += new Vector3(0.2f, 0.2f);
-        //ApplyVelocity(bullet, 10, 10);
+        //bulletTransform.position += new Vector3(0.2f, 0.2f);
     }
-    private void ApplyVelocity(Rigidbody2D rb, float x = 0f, float y = 0f)
-    {
-        // if x or y is 0, use previous velocity, i.e don't change
-        //if (x == 0f)
-        //    x = rb.velocity.x;
-        //if (y == 0f)
-        //    y = rb.velocity.y;
-
-        rb.velocity = new Vector2(x, y);
-    }
+    
 }
