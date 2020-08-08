@@ -1,9 +1,9 @@
-﻿using Assets.Utility;
-using UnityEngine;
+﻿using UnityEngine;
+using Assets.Utility;
 
 namespace Assets.Scripts
 {
-    public class AutoMove : MonoBehaviour
+    public class Despawn : MonoBehaviour
     {
         private Rigidbody2D bulletRB;
         private Transform bulletTransform;
@@ -14,13 +14,5 @@ namespace Assets.Scripts
             bulletTransform = GetComponent<Transform>();
             Utils.ApplyVelocity(bulletRB, x: Constants.DEFAULT_SPEED);
         }
-
-        // Update is called once per frame
-        void Update()
-        {
-            //bulletTransform.position += new Vector3(0.2f, 0.2f);
-        }
-
     }
 }
-    

@@ -1,61 +1,64 @@
 ﻿using Assets.Utility;
 using UnityEngine;
-
-public class Movement : MonoBehaviour
+namespace Assets.Scripts
 {
-    private Rigidbody2D Blob;
-    private int THRUST = 10;
-    private int JUMPFORCE = 145;
-    private int MAXVERTICALSPEED = 25;
-    private bool _grounded;
-
-    private Vector2 velocity;
-    void Start()
+    public class Movement : MonoBehaviour
     {
-        Blob = GetComponent<Rigidbody2D>();
-        
-    }
-    void FixedUpdate()
-    {
-        velocity = Blob.velocity;
-        
-        //CheckGrounded();
-        //Get User input
-        float HorizontalAx = Input.GetAxisRaw("Horizontal");
-        float VerticalAx = Input.GetAxisRaw("Vertical");
+        private Rigidbody2D Blob;
+        private int THRUST = 10;
+        private int JUMPFORCE = 145;
+        private int MAXVERTICALSPEED = 25;
+        private bool _grounded;
 
-        //Horizontal Move
-        Utility.ApplyVelocity(Blob, HorizontalAx * THRUST, VerticalAx * THRUST);
-        //Vertical Move
-        //ApplyVelocity(Blob, VerticalAx * THRUST);
-
-        //Rotate
-        if (Input.GetKeyDown("space"))
+        private Vector2 velocity;
+        void Start()
         {
-            
-            //if (_grounded)
-            //    ApplyVelocity(Blob, y: JUMPFORCE);
+            Blob = GetComponent<Rigidbody2D>();
+
+        }
+        void FixedUpdate()
+        {
+            velocity = Blob.velocity;
+
+            //CheckGrounded();
+            //Get User input
+            float HorizontalAx = Input.GetAxisRaw("Horizontal");
+            float VerticalAx = Input.GetAxisRaw("Vertical");
+
+            //Horizontal Move
+            Utils.ApplyVelocity(Blob, HorizontalAx * THRUST, VerticalAx * THRUST);
+            //Vertical Move
+            //ApplyVelocity(Blob, VerticalAx * THRUST);
+
+            //Rotate
+            if (Input.GetKeyDown("space"))
+            {
+
+                //if (_grounded)
+                //    ApplyVelocity(Blob, y: JUMPFORCE);
+            }
+
+            //Cap Speed
+            //CapVerticalPlayerSpeed();
         }
 
-        //Cap Speed
-        //CapVerticalPlayerSpeed();
-    }
+        private void CheckGrounded()
+        {
+            RaycastHit2D hit = Physics2D.Raycast(transform.position - new Vector3(0, 1f, 0), -Vector2.up, 0.2f);
+            if (hit.collider != null)
+                _grounded = true;
+            else
+                _grounded = false;
+        }
+        private void CapVerticalPlayerSpeed()
+        {
+            if (Blob.velocity.y > MAXVERTICALSPEED)
+                Utils.ApplyVelocity(Blob, y: MAXVERTICALSPEED);
+            else if (Blob.velocity.y < -MAXVERTICALSPEED)
+                Utils.ApplyVelocity(Blob, y: -MAXVERTICALSPEED);
 
-    private void CheckGrounded()
-    {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position - new Vector3(0, 1f, 0), -Vector2.up, 0.2f);
-        if (hit.collider != null)
-            _grounded = true;
-        else
-            _grounded = false;
-    }
-    private void CapVerticalPlayerSpeed()
-    {
-        if (Blob.velocity.y > MAXVERTICALSPEED)
-            Utility.ApplyVelocity(Blob, y: MAXVERTICALSPEED);
-        else if (Blob.velocity.y < -MAXVERTICALSPEED)
-            Utility.ApplyVelocity(Blob, y: -MAXVERTICALSPEED);
-
+        }
     }
 }
+    
 
