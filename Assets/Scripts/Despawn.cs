@@ -20,5 +20,14 @@ namespace Assets.Scripts
                 Destroy(gameObject);
             
         }
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+            //Destroy when collider touches an enemy
+            if (collision.tag == Constants.ENEMY_TAG)
+            {
+                Destroy(gameObject);
+            }
+
+        }
     }
 }

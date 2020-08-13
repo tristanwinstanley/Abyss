@@ -10,5 +10,14 @@
         #region Lifetimes
         public static float BULLET_LIFETIME = 2;
         #endregion
+
+        #region Health
+        public static int MONSTER_HEALTH = 3;
+        #endregion
+
+        #region Tags
+        public static string ENEMY_TAG = "Enemy";
+        public static string BULLET_TAG = "PlayerBullet";
+        #endregion
     }
 }
