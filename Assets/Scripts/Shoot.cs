@@ -16,10 +16,9 @@ namespace Assets.Scripts
         // Update is called once per frame
         void FixedUpdate()
         {
-            GameObject bullet = null;
             if (Input.GetMouseButtonDown(0))
             {
-                bullet = Instantiate(_prefab, Blob.position, Quaternion.identity);
+                Instantiate(_prefab, Blob.position, Quaternion.identity);
                 _bulletCount++;
             }
 

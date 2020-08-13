@@ -6,7 +6,7 @@ public class SelfRotation : MonoBehaviour
     private Transform _transform;
     
 
-    private Vector3 _mouseVector;
+    public Vector3 _mouseVector;
     private Vector3 _stickParentVector;
     private float _mouseAngle;
     void Start()
@@ -17,7 +17,7 @@ public class SelfRotation : MonoBehaviour
     {
         //Vector between mouse and current position
         _mouseVector = Camera.main.ScreenToWorldPoint(Input.mousePosition) - _transform.position;
-
+        
         //Angle between mouse and right vector 0-360 deg
         _mouseAngle = ComputeTotalAngle(_mouseVector, Vector3.right);
         

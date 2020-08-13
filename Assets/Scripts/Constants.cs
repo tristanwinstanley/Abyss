@@ -4,7 +4,7 @@
     {
         #region Speeds
         public static float PLAYER_SPEED = 10;
-        public static float BULLET_SPEED = 5;
+        public static float BULLET_SPEED = 20;
         #endregion
 
         #region Lifetimes
