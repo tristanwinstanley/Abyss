@@ -1,7 +1,7 @@
 ﻿using Assets.Utility;
 using UnityEngine;
 
-namespace Assets.Scripts
+namespace Assets.Scripts.Player
 {
     public class AutoMove : MonoBehaviour
     {
@@ -21,13 +21,6 @@ namespace Assets.Scripts
             Vector2 mouseVector2d = new Vector2(_mouseVector.x, _mouseVector.y);
             Utils.ApplyVelocity(bulletRB, mouseVector2d.normalized.x * Constants.BULLET_SPEED, mouseVector2d.normalized.y * Constants.BULLET_SPEED);
         }
-
-        // Update is called once per frame
-        void Update()
-        {
-            
-        }
-
     }
 }
     

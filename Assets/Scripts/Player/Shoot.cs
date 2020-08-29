@@ -1,10 +1,9 @@
 ﻿using UnityEngine;
-namespace Assets.Scripts
+namespace Assets.Scripts.Player
 {
     public class Shoot : MonoBehaviour
     {
-        //Todo move bullets, delete bullets that have travelled a certain distance
-        [SerializeField] private GameObject _prefab;
+        [SerializeField] private GameObject bulletPrefab;
         private Rigidbody2D Blob;
         private int _bulletCount;
         void Start()
@@ -18,7 +17,7 @@ namespace Assets.Scripts
         {
             if (Input.GetMouseButtonDown(0))
             {
-                Instantiate(_prefab, Blob.position, Quaternion.identity);
+                Instantiate(bulletPrefab, Blob.position, Quaternion.identity);
                 _bulletCount++;
             }
 

@@ -1,6 +1,6 @@
 ﻿using Assets.Utility;
 using UnityEngine;
-namespace Assets.Scripts
+namespace Assets.Scripts.Player
 {
     public class Movement : MonoBehaviour
     {
@@ -13,7 +13,6 @@ namespace Assets.Scripts
         void Start()
         {
             Blob = GetComponent<Rigidbody2D>();
-
         }
         void FixedUpdate()
         {
