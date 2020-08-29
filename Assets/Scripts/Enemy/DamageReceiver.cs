@@ -16,7 +16,7 @@ namespace Assets.Scripts.Enemy
         private void OnTriggerEnter2D(Collider2D collision)
         {
             //Lose 1 health on bullet collision
-            if (currentLayer == collision.gameObject.layer)
+            if (collision.tag == Constants.PLAYER_BULLET_TAG)
             {
                 health -= 1;
                 Debug.Log(health);

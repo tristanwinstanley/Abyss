@@ -23,6 +23,7 @@ namespace Assets.Scripts.Player.Gun
         }
         void ShootProjectile(GameObject projectile)
         {
+            projectile.tag = Constants.PLAYER_BULLET_TAG;
             projectile.layer = Constants.ENEMY_LAYER;
             Rigidbody2D projectileRB = projectile.GetComponent<Rigidbody2D>();
             Transform projectileTR = projectile.GetComponent<Transform>();

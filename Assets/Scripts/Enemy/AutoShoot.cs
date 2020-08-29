@@ -28,6 +28,7 @@ namespace Assets.Scripts.Enemy
         {
             //Create an instance of prefab in world
             GameObject prefabInstance = Instantiate(projectilePrefab, position, Quaternion.identity);
+            prefabInstance.tag = Constants.ENEMY_BULLET_TAG;
             //Apply velocity to prefab to make it move
             prefabInstance.layer = Constants.PLAYER_LAYER;
             Rigidbody2D prefabRB = prefabInstance.GetComponent<Rigidbody2D>();

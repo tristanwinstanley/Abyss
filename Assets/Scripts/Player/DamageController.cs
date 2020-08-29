@@ -9,26 +9,37 @@ namespace Assets.Scripts.Player
     {
         private Rigidbody2D bulletRB;
         private Transform bulletTransform;
-        public int health;
+        public int currentHealth;
         public HealthBar healthBar;
+        int currentLayer;
 
         // Start is called before the first frame update
         void Start()
         {
-            health = Constants.PLAYER_HEALTH;
-            healthBar.SetMaxValue(health);
+            currentHealth = Constants.PLAYER_HEALTH;
+            healthBar.SetMaxValue(currentHealth);
+            currentLayer = this.gameObject.layer;
         }
 
         // Update is called once per frame
         void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                health -= 10;
-            }
-            healthBar.SetValue(health);
-        }
+            healthBar.SetValue(currentHealth);
 
+            //Kill when zero health
+            if (currentHealth == 0)
+                Destroy(gameObject);
+        }
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+            //Lose 1 health on bullet collision
+            if (collision.tag == Constants.ENEMY_BULLET_TAG)
+            {
+                currentHealth -= 10;
+                Debug.Log(currentHealth);
+            }
+
+        }
     }
 }
 
