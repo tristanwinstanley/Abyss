@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Assets.Utility
+namespace Assets.Scripts.Utility
 {
     public class Utils
     {

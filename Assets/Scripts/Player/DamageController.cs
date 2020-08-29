@@ -1,7 +1,7 @@
-﻿using Assets.Utility;
+﻿using Assets.Scripts.Utility;
 using UnityEngine;
 using UnityEngine.UI;
-using Assets.UIElements;
+using Assets.Scripts.UIElements;
 
 namespace Assets.Scripts.Player
 {

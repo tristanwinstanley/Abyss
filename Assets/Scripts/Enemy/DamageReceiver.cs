@@ -1,20 +1,22 @@
-﻿using Assets.Utility;
+﻿using Assets.Scripts.Utility;
 using UnityEngine;
 
-namespace Assets.Scripts
+namespace Assets.Scripts.Enemy
 {
-    public class DamageMaker : MonoBehaviour
+    public class DamageReceiver : MonoBehaviour
     {
         private BoxCollider2D monsterCollider;
         private int health;
+        int currentLayer;
         void Start()
         {
             health = Constants.MONSTER_HEALTH;
+            currentLayer = this.gameObject.layer;
         }
         private void OnTriggerEnter2D(Collider2D collision)
         {
             //Lose 1 health on bullet collision
-            if (collision.tag == Constants.PLAYER_BULLET_TAG)
+            if (currentLayer == collision.gameObject.layer)
             {
                 health -= 1;
                 Debug.Log(health);
@@ -23,10 +25,8 @@ namespace Assets.Scripts
         }
         void Update()
         {
-            //Destroy once BULLET_LIFETIME is reached
             if (health == 0)
                 Destroy(gameObject);
-
         }
 
     }

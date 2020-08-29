@@ -1,16 +1,18 @@
 ﻿using UnityEngine;
-using Assets.Utility;
+using Assets.Scripts.Utility;
 
-namespace Assets.Scripts
+namespace Assets.Scripts.Projectiles.Bullet
 {
     public class Despawn : MonoBehaviour
     {
         float timezero;
+        int currentLayer;
 
         // Start is called before the first frame update
         void Start()
         {
             timezero = Time.timeSinceLevelLoad;
+            currentLayer = this.gameObject.layer;
         }
 
         void Update()
@@ -22,8 +24,8 @@ namespace Assets.Scripts
         }
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            //Destroy when collider touches an enemy
-            if (collision.tag == Constants.ENEMY_TAG)
+            //Destroy when collider touches something in the same layer
+            if (currentLayer == collision.gameObject.layer)
             {
                 Destroy(gameObject);
             }

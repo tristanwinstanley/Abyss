@@ -1,4 +1,4 @@
-﻿using Assets.Utility;
+﻿using Assets.Scripts.Utility;
 using UnityEngine;
 namespace Assets.Scripts.Player
 {
