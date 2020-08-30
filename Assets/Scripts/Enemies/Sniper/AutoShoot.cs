@@ -1,6 +1,6 @@
 ﻿using Assets.Scripts.Utility;
 using UnityEngine;
-namespace Assets.Scripts.Enemy
+namespace Assets.Scripts.Enemies.Sniper
 {
     public class AutoShoot : MonoBehaviour
     {

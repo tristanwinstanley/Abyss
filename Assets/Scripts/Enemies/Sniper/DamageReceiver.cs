@@ -1,17 +1,15 @@
 ﻿using Assets.Scripts.Utility;
 using UnityEngine;
 
-namespace Assets.Scripts.Enemy
+namespace Assets.Scripts.Enemies.Sniper
 {
     public class DamageReceiver : MonoBehaviour
     {
         private BoxCollider2D monsterCollider;
         private int health;
-        int currentLayer;
         void Start()
         {
             health = Constants.MONSTER_HEALTH;
-            currentLayer = this.gameObject.layer;
         }
         private void OnTriggerEnter2D(Collider2D collision)
         {

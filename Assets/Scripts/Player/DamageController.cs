@@ -35,7 +35,7 @@ namespace Assets.Scripts.Player
             //Lose 1 health on bullet collision
             if (collision.tag == Constants.ENEMY_BULLET_TAG)
             {
-                currentHealth -= 10;
+                currentHealth -= 0;
                 Debug.Log(currentHealth);
             }
 
