@@ -15,9 +15,11 @@
         #region Health
         public static int MONSTER_HEALTH = 3;
         public static int PLAYER_HEALTH = 100;
+        public static int ENEMY_SPAWNER_HEALTH = 10;
         #endregion
-        #region ShootFrequency
+        #region Frequencies
         public static float ENEMY_SHOOT_FREQUENCY = 2f;
+        public static float ENEMY_SPAWN_FREQUENCY = 5f;
         #endregion
 
         #region Tags
