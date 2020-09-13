@@ -17,7 +17,7 @@
         public static int PLAYER_HEALTH = 100;
         public static int ENEMY_SPAWNER_HEALTH = 10;
         #endregion
-        #region Frequencies
+        #region Frequencies in second
         public static float ENEMY_SHOOT_FREQUENCY = 2f;
         public static float ENEMY_SPAWN_FREQUENCY = 5f;
         #endregion

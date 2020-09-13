@@ -2,7 +2,7 @@
 using Assets.Scripts.Utility;
 using UnityEngine;
 
-namespace Assets.Scripts.Enemies.Sniper
+namespace Assets.Scripts.Enemies.EnemySpawner
 {
     public class DamageReceiver : MonoBehaviour
     {
@@ -11,7 +11,7 @@ namespace Assets.Scripts.Enemies.Sniper
         public HealthBar _healthBar;
         void Start()
         {
-            health = Constants.MONSTER_HEALTH;
+            health = Constants.ENEMY_SPAWNER_HEALTH;
             _healthBar.SetMaxValue(health);
         }
         private void OnTriggerEnter2D(Collider2D collision)
