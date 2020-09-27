@@ -9,19 +9,14 @@ namespace Assets.Scripts.Enemies.EnemySpawner
         [SerializeField] private GameObject sniperPrefab;
         float timeSinceLastSpawn;
         List<GameObject> _currentEnemies;
-        int _currentHealth;
         void Start()
         {
             _currentEnemies = new List<GameObject>();
-            _currentHealth = Constants.ENEMY_SPAWNER_HEALTH;
         }
 
         // Update is called once per frame
         void Update()
         {
-            if (_currentHealth == 0)
-                Destroy(gameObject);
-
             ClearDestroyedInstances();
 
             //Spawn new enemy after 10s if fewer than 5
@@ -31,15 +26,6 @@ namespace Assets.Scripts.Enemies.EnemySpawner
                 timeSinceLastSpawn = Time.realtimeSinceStartup;
                 _currentEnemies.Add(prefabInstance);
             }
-        }
-        private void OnTriggerEnter2D(Collider2D collision)
-        {
-            //Lose 1 health on bullet collision
-            if (collision.tag == Constants.PLAYER_BULLET_TAG)
-            {
-                _currentHealth -= 1;
-            }
-
         }
 
         private void ClearDestroyedInstances()

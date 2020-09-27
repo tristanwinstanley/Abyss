@@ -5,14 +5,16 @@ namespace Assets.Scripts.Player
     public class Movement : MonoBehaviour
     {
         private Rigidbody2D Blob;
-        private int JUMPFORCE = 145;
+        private int JUMPFORCE = 160;
         private int MAXVERTICALSPEED = 25;
         private bool _grounded;
+        private Collider2D _collider;
 
         private Vector2 velocity;
         void Start()
         {
             Blob = GetComponent<Rigidbody2D>();
+            _collider = GetComponent<Collider2D>();
         }
         void FixedUpdate()
         {
@@ -24,30 +26,19 @@ namespace Assets.Scripts.Player
             float VerticalAx = Input.GetAxisRaw("Vertical");
 
             //Horizontal Move
-            Utils.ApplyVelocity(Blob, HorizontalAx * Constants.PLAYER_SPEED, VerticalAx * Constants.PLAYER_SPEED);
-            //Vertical Move
-            //ApplyVelocity(Blob, VerticalAx * THRUST);
-
+            Utils.ApplyVelocity(Blob, HorizontalAx * Constants.PLAYER_SPEED, velocity.y);
+            
             //Rotate
             if (Input.GetKeyDown("space"))
             {
-
-                //if (_grounded)
-                //    ApplyVelocity(Blob, y: JUMPFORCE);
+                if (_grounded)
+                    Utils.ApplyVelocity(Blob, y: JUMPFORCE);
             }
 
             //Cap Speed
-            //CapVerticalPlayerSpeed();
+            CapVerticalPlayerSpeed();
         }
 
-        private void CheckGrounded()
-        {
-            RaycastHit2D hit = Physics2D.Raycast(transform.position - new Vector3(0, 1f, 0), -Vector2.up, 0.2f);
-            if (hit.collider != null)
-                _grounded = true;
-            else
-                _grounded = false;
-        }
         private void CapVerticalPlayerSpeed()
         {
             if (Blob.velocity.y > MAXVERTICALSPEED)
@@ -55,6 +46,20 @@ namespace Assets.Scripts.Player
             else if (Blob.velocity.y < -MAXVERTICALSPEED)
                 Utils.ApplyVelocity(Blob, y: -MAXVERTICALSPEED);
 
+        }
+        void OnCollisionEnter2D(Collision2D collision)
+        {
+            if (collision.gameObject.tag == "Floor")
+            {
+                _grounded = true;
+            }
+        }
+        void OnCollisionExit2D(Collision2D collision)
+        {
+            if (collision.gameObject.tag == "Floor")
+            {
+                _grounded = false;
+            }
         }
     }
 }

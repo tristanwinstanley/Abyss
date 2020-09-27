@@ -16,22 +16,26 @@ namespace Assets.Scripts.Player.Gun
         {
             if (Input.GetMouseButtonDown(0))
             {
-                GameObject bullet = Instantiate(bulletPrefab, Blob.position, Quaternion.identity);
-                ShootProjectile(bullet);
+                ShootProjectile();
             }
 
         }
-        void ShootProjectile(GameObject projectile)
+        void ShootProjectile()
         {
+            //Vector between mouse and current position
+            Vector3 mouseVector = Camera.main.ScreenToWorldPoint(Input.mousePosition) - new Vector3(Blob.position.x, Blob.position.y, 0) ;
+            Vector2 mouseVector2d = new Vector2(mouseVector.x, mouseVector.y);
+
+            //Spawn projectile away from player to avoid collision issues
+            Vector2 spawnPosition = Blob.position + mouseVector2d * 0.3f;
+
+            GameObject projectile = Instantiate(bulletPrefab, spawnPosition, Quaternion.identity);
             projectile.tag = Constants.PLAYER_BULLET_TAG;
             projectile.layer = Constants.ENEMY_LAYER;
             Rigidbody2D projectileRB = projectile.GetComponent<Rigidbody2D>();
-            Transform projectileTR = projectile.GetComponent<Transform>();
+            //Transform projectileTR = projectile.GetComponent<Transform>();
 
             //Apply normalized velocity vector to bullet in direction of mouse
-            //Vector between mouse and current position
-            Vector3 mouseVector = Camera.main.ScreenToWorldPoint(Input.mousePosition) - projectileTR.position;
-            Vector2 mouseVector2d = new Vector2(mouseVector.x, mouseVector.y);
             Utils.ApplyVelocity(projectileRB, mouseVector2d.normalized.x * Constants.BULLET_SPEED, mouseVector2d.normalized.y * Constants.BULLET_SPEED);
         }
     }
