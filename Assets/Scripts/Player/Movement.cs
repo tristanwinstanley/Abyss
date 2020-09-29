@@ -5,34 +5,44 @@ namespace Assets.Scripts.Player
     public class Movement : MonoBehaviour
     {
         private Rigidbody2D Blob;
-        private int JUMPFORCE = 160;
-        private int MAXVERTICALSPEED = 25;
-        private bool _grounded;
+        private int _jumpCount;
+        public bool _grounded;
         private Collider2D _collider;
-
         private Vector2 velocity;
+        private float timeOfLastJump;
+
+        public int playerSpeed = 20;
+        public int jumpforce = 40;
         void Start()
         {
             Blob = GetComponent<Rigidbody2D>();
             _collider = GetComponent<Collider2D>();
+            _jumpCount = 0;
+            timeOfLastJump = Time.realtimeSinceStartup;
         }
         void FixedUpdate()
         {
             velocity = Blob.velocity;
 
-            //CheckGrounded();
             //Get User input
             float HorizontalAx = Input.GetAxisRaw("Horizontal");
             float VerticalAx = Input.GetAxisRaw("Vertical");
 
             //Horizontal Move
-            Utils.ApplyVelocity(Blob, HorizontalAx * Constants.PLAYER_SPEED, velocity.y);
-            
-            //Rotate
-            if (Input.GetKeyDown("space"))
+            Utils.ApplyVelocity(Blob, HorizontalAx * playerSpeed, velocity.y);
+
+            //Jump every 0.2s
+            float currentTime = Time.realtimeSinceStartup;
+            if (Input.GetKeyDown("space") && currentTime - timeOfLastJump > 0.2f)
             {
-                if (_grounded)
-                    Utils.ApplyVelocity(Blob, y: JUMPFORCE);
+                if (_grounded || _jumpCount == 1)
+                {
+                    Utils.ApplyVelocity(Blob, y: jumpforce);
+                    _jumpCount++;
+                }
+
+                //Reset timer
+                timeOfLastJump = currentTime;
             }
 
             //Cap Speed
@@ -41,10 +51,10 @@ namespace Assets.Scripts.Player
 
         private void CapVerticalPlayerSpeed()
         {
-            if (Blob.velocity.y > MAXVERTICALSPEED)
-                Utils.ApplyVelocity(Blob, y: MAXVERTICALSPEED);
-            else if (Blob.velocity.y < -MAXVERTICALSPEED)
-                Utils.ApplyVelocity(Blob, y: -MAXVERTICALSPEED);
+            if (Blob.velocity.y > Constants.PL_MAX_UP_SPEED)
+                Utils.ApplyVelocity(Blob, y: Constants.PL_MAX_UP_SPEED);
+            else if (Blob.velocity.y < -Constants.PL_MAX_DOWN_SPEED)
+                Utils.ApplyVelocity(Blob, x: Blob.velocity.x, y: -Constants.PL_MAX_DOWN_SPEED);
 
         }
         void OnCollisionEnter2D(Collision2D collision)
@@ -52,6 +62,7 @@ namespace Assets.Scripts.Player
             if (collision.gameObject.tag == "Floor")
             {
                 _grounded = true;
+                _jumpCount = 0;
             }
         }
         void OnCollisionExit2D(Collision2D collision)

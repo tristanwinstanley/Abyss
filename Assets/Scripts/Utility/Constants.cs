@@ -4,6 +4,9 @@
     {
         #region Speeds
         public static float PLAYER_SPEED = 10;
+        public static float PL_MAX_UP_SPEED = 100;
+        public static float PL_MAX_DOWN_SPEED = 35;
+
         public static float BULLET_SPEED = 20;
         public static float ENEMY_SPEED = 5;
         #endregion
