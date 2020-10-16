@@ -31,6 +31,11 @@ namespace Assets.Scripts.Player
             //Horizontal Move
             Utils.ApplyVelocity(Blob, HorizontalAx * playerSpeed, velocity.y);
 
+            if (HorizontalAx != 0 && transform.right.x != HorizontalAx)
+            {
+                transform.Rotate(0, 180, 0);
+            }
+
             //Jump every 0.2s
             float currentTime = Time.realtimeSinceStartup;
             if (Input.GetKeyDown("space") && currentTime - timeOfLastJump > 0.2f)

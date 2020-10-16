@@ -7,12 +7,14 @@ namespace Assets.Scripts.Projectiles.Bullet
     {
         float timezero;
         int currentLayer;
+        int collisionCount;
 
         // Start is called before the first frame update
         void Start()
         {
             timezero = Time.timeSinceLevelLoad;
             currentLayer = this.gameObject.layer;
+            collisionCount = 0;
         }
 
         void Update()
@@ -24,12 +26,10 @@ namespace Assets.Scripts.Projectiles.Bullet
         }
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            //Destroy when collider touches something in the same layer
-            if (currentLayer == collision.gameObject.layer)
-            {
-                Destroy(gameObject);
-            }
-
+            //Destroy on second rebound
+            collisionCount++;
+            if (collisionCount > 1)
+                Destroy(this.gameObject);
         }
     }
 }

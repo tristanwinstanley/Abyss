@@ -6,21 +6,30 @@ namespace Assets.Scripts.Player.Gun
     {
         [SerializeField] private GameObject bulletPrefab;
         private Rigidbody2D Blob;
+        private float timeOfLastShot;
+        private GameObject currentBullet;
+        public int shot_speed;
         void Start()
         {
             Blob = GetComponent<Rigidbody2D>();
+            timeOfLastShot = Time.realtimeSinceStartup;
         }
 
         // Update is called once per frame
         void FixedUpdate()
         {
-            if (Input.GetMouseButtonDown(0))
+            float currentTime = Time.realtimeSinceStartup;
+            if (Input.GetMouseButtonDown(0) && currentTime - timeOfLastShot > 2f)
             {
-                ShootProjectile();
+                //Only 1 bullet at a time
+                //if (currentBullet != null)
+                //    Destroy(currentBullet);
+                currentBullet = ShootProjectile();
+                timeOfLastShot = Time.realtimeSinceStartup;
             }
 
         }
-        void ShootProjectile()
+        GameObject ShootProjectile()
         {
             //Vector between mouse and current position
             Vector3 mouseVector = Camera.main.ScreenToWorldPoint(Input.mousePosition) - new Vector3(Blob.position.x, Blob.position.y, 0) ;
@@ -36,7 +45,9 @@ namespace Assets.Scripts.Player.Gun
             //Transform projectileTR = projectile.GetComponent<Transform>();
 
             //Apply normalized velocity vector to bullet in direction of mouse
-            Utils.ApplyVelocity(projectileRB, mouseVector2d.normalized.x * Constants.BULLET_SPEED, mouseVector2d.normalized.y * Constants.BULLET_SPEED);
+            Utils.ApplyVelocity(projectileRB, mouseVector2d.normalized.x * shot_speed, mouseVector2d.normalized.y * shot_speed);
+
+            return projectile;
         }
     }
 }

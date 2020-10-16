@@ -16,9 +16,9 @@ namespace Assets.Scripts.Enemies.Sniper
         // Update is called once per frame
         void Update()
         {
-            //Move in player direction
-            Vector2 VectorToPlayer = Utils.Get2DNormVector(GameObject.FindWithTag(Constants.PLAYER_TAG).transform.position - currentTransform.position);
-            rb.velocity = VectorToPlayer * Constants.ENEMY_SPEED;
+            //Move in horiz player direction, dont change y component
+            float direction = GameObject.FindWithTag(Constants.PLAYER_TAG).transform.position.x - currentTransform.position.x > 0 ? 1 : -1;
+            rb.velocity = new Vector2(direction * Constants.ENEMY_SPEED, rb.velocity.y);
         }
     }
 

@@ -7,21 +7,21 @@
         public static float PL_MAX_UP_SPEED = 100;
         public static float PL_MAX_DOWN_SPEED = 35;
 
-        public static float BULLET_SPEED = 20;
+        public static float BULLET_SPEED = 30;
         public static float ENEMY_SPEED = 5;
         #endregion
 
         #region Lifetimes
-        public static float BULLET_LIFETIME = 2;
+        public static float BULLET_LIFETIME = 5;
         #endregion
 
         #region Health
-        public static int MONSTER_HEALTH = 3;
+        public static int MONSTER_HEALTH = 50;
         public static int PLAYER_HEALTH = 100;
         public static int ENEMY_SPAWNER_HEALTH = 10;
         #endregion
         #region Frequencies in second
-        public static float ENEMY_SHOOT_FREQUENCY = 2f;
+        public static float ENEMY_SHOOT_FREQUENCY = 0.5f;
         public static float ENEMY_SPAWN_FREQUENCY = 5f;
         #endregion
 
