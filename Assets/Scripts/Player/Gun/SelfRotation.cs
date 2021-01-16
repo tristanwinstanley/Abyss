@@ -5,11 +5,8 @@ namespace Assets.Scripts.Player.Gun
     public class SelfRotation : MonoBehaviour
     {
         private Transform _transform;
-
-
         public Vector3 _mouseVector;
         private Vector3 _stickParentVector;
-        private float _mouseAngle;
         void Start()
         {
             _transform = GetComponent<Transform>();
@@ -19,14 +16,13 @@ namespace Assets.Scripts.Player.Gun
             //Vector between mouse and current position
             _mouseVector = Camera.main.ScreenToWorldPoint(Input.mousePosition) - _transform.position;
 
-            //Angle between mouse and right vector 0-360 deg
-            _mouseAngle = ComputeTotalAngle(_mouseVector, Vector3.right);
+            //Angle between mouse and right vector (0, 0, 0-360 deg)
+            Vector3 mouseAngle = ComputeTotalAngle(_mouseVector, Vector3.right);
 
             //Rotate by setting angle to match mouse angle
-            _transform.eulerAngles = Vector3.forward * _mouseAngle;
-
+            _transform.eulerAngles = mouseAngle;
         }
-        private float ComputeTotalAngle(Vector3 a, Vector3 b)
+        public static Vector3 ComputeTotalAngle(Vector3 a, Vector3 b)
         {
             a = new Vector2(a.x, a.y);
             b = new Vector2(b.x, b.y);
@@ -42,7 +38,8 @@ namespace Assets.Scripts.Player.Gun
             if (a.y < 0)
                 outputAngle = 360 - outputAngle;
 
-            return outputAngle;
+            // output is (0, 0, 0-360 deg)
+            return Vector3.forward * outputAngle;
         }
         private Vector3 GetVectorWithParent(Vector3 inputPosition)
         {

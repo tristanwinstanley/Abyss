@@ -348,3 +348,6 @@ healthchecksdb
 /Abyss.sln
 /Assets/Prefabs
 /Assets/Images
+/Assets/Animations/ShieldedKami.controller
+/Assets/Animations/Kami_Defense.anim
+/Assets/Animations/Kami_Attack.anim

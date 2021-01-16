@@ -8,7 +8,6 @@ namespace Assets.Scripts.Projectiles.Bullet
         float timezero;
         int currentLayer;
         int collisionCount;
-
         // Start is called before the first frame update
         void Start()
         {
@@ -16,19 +15,39 @@ namespace Assets.Scripts.Projectiles.Bullet
             currentLayer = this.gameObject.layer;
             collisionCount = 0;
         }
-
         void Update()
         {
             //Destroy once BULLET_LIFETIME is reached
             if (Time.timeSinceLevelLoad - timezero > Constants.BULLET_LIFETIME)
                 Destroy(gameObject);
-            
+
         }
-        private void OnTriggerEnter2D(Collider2D collision)
+        private void OnTriggerEnter2D(Collider2D otherCollider)
         {
+            GameObject player = GameObject.FindWithTag(Constants.PLAYER_TAG);
+            Rigidbody2D playerRB = player.GetComponent<Rigidbody2D>();
+            bool destroyCurrentGameObject = false;
+            switch (otherCollider.gameObject.tag)
+            {
+                case Constants.PLAYER_TAG:
+                    //destroyCurrentGameObject = true;
+                    collisionCount++;
+                    break;
+                case Constants.JUMP_CLD_TAG:
+                    Utils.ApplyVelocity(playerRB, y: 70);
+                    //destroyCurrentGameObject = true;
+                    break;
+                default:
+                    collisionCount++;
+                    break;
+
+            } 
+
             //Destroy on second rebound
-            collisionCount++;
-            if (collisionCount > 1)
+            if (collisionCount > 5)
+                destroyCurrentGameObject = true;
+
+            if (destroyCurrentGameObject)
                 Destroy(this.gameObject);
         }
     }

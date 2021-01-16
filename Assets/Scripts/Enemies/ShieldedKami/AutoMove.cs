@@ -8,19 +8,18 @@ namespace Assets.Scripts.Enemies.ShieldedKami
         Rigidbody2D rb;
         float previousDirection;
         SpriteRenderer spriteRenderer;
+        Animator animator;
         void Start()
         {
             rb = GetComponent<Rigidbody2D>();
             spriteRenderer = GetComponent<SpriteRenderer>();
             previousDirection = 1;
+            animator = GetComponent<Animator>();
         }
 
         // Update is called once per frame
         void Update()
         {
-            
-
-            
             //Move in horiz player direction, dont change y component
             //1:right  -1:left
             GameObject player = GameObject.FindWithTag(Constants.PLAYER_TAG);
@@ -38,12 +37,16 @@ namespace Assets.Scripts.Enemies.ShieldedKami
             }
 
             int speedBoost = 1;
-            if (direction == player.transform.right.x)
+            if (direction == player.transform.right.x) //Attack
             {
                 //Enemy and player are both looking in same direction
                 //Hence player is not looking at enemy
                 speedBoost = 2;
-
+                animator.SetBool("FacingPlayer", false);
+            }
+            else //Defense
+            {
+                animator.SetBool("FacingPlayer", true);
             }
 
             //Flip left and right
