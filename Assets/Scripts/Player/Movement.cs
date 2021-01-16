@@ -22,7 +22,7 @@ namespace Assets.Scripts.Player
             _jumpCount = 0;
             timeOfLastJump = Time.realtimeSinceStartup;
         }
-        void FixedUpdate()
+        void Update()
         {
             velocity = Blob.velocity;
 

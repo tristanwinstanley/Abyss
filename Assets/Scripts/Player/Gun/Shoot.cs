@@ -10,15 +10,21 @@ namespace Assets.Scripts.Player.Gun
         private Rigidbody2D Blob;
         private float timeOfLastShot;
         private GameObject currentBullet;
-        public int shot_speed;
+        public bool isCharging;
+        private float chargeTime;
+        private int shot_speed;
+
         void Start()
         {
             Blob = GetComponent<Rigidbody2D>();
             timeOfLastShot = Time.realtimeSinceStartup;
+            isCharging = false;
+            chargeTime = 0f;
+            shot_speed = 90;
         }
 
         // Update is called once per frame
-        void FixedUpdate()
+        void Update()
         {
             float currentTime = Time.realtimeSinceStartup;
             //if (Input.GetMouseButtonDown(0) && currentTime - timeOfLastShot > .05f)
@@ -30,15 +36,29 @@ namespace Assets.Scripts.Player.Gun
             //    timeOfLastShot = Time.realtimeSinceStartup;
             //}
 
-            if (Input.GetMouseButtonDown(0) && currentTime - timeOfLastShot > .05f)
+            // Mouse button still pressed, increase charge time
+            if (isCharging)
             {
-                currentBullet = ShootArrow();
-                timeOfLastShot = Time.realtimeSinceStartup;
+                chargeTime += Time.deltaTime;
+            }
+            //timeOfLastShot is not working as expected
+            if (Input.GetMouseButtonDown(0) && currentTime - timeOfLastShot > 1f)
+            {
+                isCharging = true;
             }
 
+            
+            // Shoot when mouse button is released
+            if (Input.GetMouseButtonUp(0))
+            {
+                isCharging = false;
+                currentBullet = ShootArrow(chargeTime);
+                chargeTime = 0;
+                timeOfLastShot = Time.realtimeSinceStartup;
+            }
         }
         
-        public GameObject ShootArrow()
+        public GameObject ShootArrow(float shotIntensity)
         {
             //Vector between mouse and current position
             Vector3 mouseVector = Camera.main.ScreenToWorldPoint(Input.mousePosition) - new Vector3(Blob.position.x, Blob.position.y, 0);
@@ -54,11 +74,26 @@ namespace Assets.Scripts.Player.Gun
             projectile.layer = Constants.ENEMY_LAYER;
             Rigidbody2D projectileRB = projectile.GetComponent<Rigidbody2D>();
             //Transform projectileTR = projectile.GetComponent<Transform>();
-
+            shotIntensity = GetFinalShotIntensity(shotIntensity);
             //Apply normalized velocity vector to bullet in direction of mouse
-            Utils.ApplyVelocity(projectileRB, mouseVector2d.normalized.x * shot_speed, mouseVector2d.normalized.y * shot_speed);
+            Utils.ApplyVelocity(projectileRB, mouseVector2d.normalized.x * shot_speed * shotIntensity, mouseVector2d.normalized.y * shot_speed * shotIntensity);
 
             return projectile;
+        }
+        private float GetFinalShotIntensity(float shotIntensity)
+        {
+            float maxTimeRange = 1f;
+            float minTimeRange = 0.2f;
+            float result = 0f;
+            //max is 1, min is 0.001
+            if (shotIntensity < minTimeRange)
+                result = minTimeRange / maxTimeRange;
+            else if (shotIntensity < maxTimeRange)
+                result = shotIntensity / maxTimeRange;
+            else
+                result = 1;
+
+            return result;
         }
         GameObject ShootBullet()
         {
