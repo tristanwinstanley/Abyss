@@ -8,7 +8,7 @@ namespace Assets.Scripts.Enemies.EnemySpawner
     {
         private BoxCollider2D monsterCollider;
         private int health;
-        public HealthBar _healthBar;
+        public MySlider _healthBar;
         void Start()
         {
             health = Constants.ENEMY_SPAWNER_HEALTH;

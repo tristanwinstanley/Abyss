@@ -1,12 +1,15 @@
 ﻿using Assets.Scripts.Utility;
 using UnityEngine;
 using Assets.Scripts.Player.Gun;
+using Assets.Scripts.UIElements;
+
 namespace Assets.Scripts.Player.Gun
 {
     public class Shoot : MonoBehaviour
     {
         [SerializeField] private GameObject bulletPrefab;
         [SerializeField] private GameObject arrowPrefab;
+        public MySlider shotPower;
         private Rigidbody2D Blob;
         private float timeOfLastShot;
         private GameObject currentBullet;
@@ -21,6 +24,8 @@ namespace Assets.Scripts.Player.Gun
             isCharging = false;
             chargeTime = 0f;
             shot_speed = 90;
+            shotPower.SetMaxValue(1);
+            shotPower.SetValue(0);
         }
 
         // Update is called once per frame
@@ -40,9 +45,15 @@ namespace Assets.Scripts.Player.Gun
             if (isCharging)
             {
                 chargeTime += Time.deltaTime;
+                if (shotPower.slider.value < 2)
+                    shotPower.AddValue(Time.deltaTime);
+                if (shotPower.slider.value > 2)
+                {
+                    //
+                }
             }
             //timeOfLastShot is not working as expected
-            if (Input.GetMouseButtonDown(0) && currentTime - timeOfLastShot > 1f)
+            if (Input.GetMouseButtonDown(0) && currentTime - timeOfLastShot > 0.1f)
             {
                 isCharging = true;
             }
@@ -53,6 +64,7 @@ namespace Assets.Scripts.Player.Gun
             {
                 isCharging = false;
                 currentBullet = ShootArrow(chargeTime);
+                shotPower.SetValue(0);
                 chargeTime = 0;
                 timeOfLastShot = Time.realtimeSinceStartup;
             }

@@ -10,7 +10,7 @@ namespace Assets.Scripts.Player
         private Rigidbody2D bulletRB;
         private Transform bulletTransform;
         public int currentHealth;
-        public HealthBar healthBar;
+        public MySlider healthBar;
         int currentLayer;
 
         // Start is called before the first frame update

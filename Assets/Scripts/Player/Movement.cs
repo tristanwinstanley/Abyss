@@ -36,6 +36,7 @@ namespace Assets.Scripts.Player
                 Utils.ApplyVelocity(Blob, HorizontalAx * playerSpeed, velocity.y);
             }
 
+            // Make sprite look left and right
             if (HorizontalAx != 0 && transform.right.x != HorizontalAx)
             {
                 transform.Rotate(0, 180, 0);

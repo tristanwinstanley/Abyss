@@ -4,16 +4,24 @@ using UnityEngine;
 using UnityEngine.UI;
 namespace Assets.Scripts.UIElements
 {
-    public class HealthBar : MonoBehaviour
+    public class MySlider : MonoBehaviour
     {
         public Slider slider;
         public void SetMaxValue(int maxValue)
         {
             slider.maxValue = maxValue;
         }
-        public void SetValue(int health)
+        public void SetValue(int value)
         {
-            slider.value = health;
+            slider.value = value;
+        }
+        public void AddValue(int value)
+        {
+            slider.value += value;
+        }
+        public void AddValue(float value)
+        {
+            slider.value += value;
         }
     }
 }
