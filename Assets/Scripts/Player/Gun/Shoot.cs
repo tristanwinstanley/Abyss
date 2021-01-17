@@ -15,16 +15,16 @@ namespace Assets.Scripts.Player.Gun
         private GameObject currentBullet;
         public bool isCharging;
         private float chargeTime;
-        private int shot_speed;
-
+        public int shot_speed;
+        private float maxTimeRange;
         void Start()
         {
             Blob = GetComponent<Rigidbody2D>();
             timeOfLastShot = Time.realtimeSinceStartup;
             isCharging = false;
             chargeTime = 0f;
-            shot_speed = 90;
-            shotPower.SetMaxValue(1);
+            maxTimeRange = 0.75f;
+            shotPower.SetMaxValue(maxTimeRange);
             shotPower.SetValue(0);
         }
 
@@ -53,7 +53,7 @@ namespace Assets.Scripts.Player.Gun
                 }
             }
             //timeOfLastShot is not working as expected
-            if (Input.GetMouseButtonDown(0) && currentTime - timeOfLastShot > 0.1f)
+            if (Input.GetMouseButtonDown(0))
             {
                 isCharging = true;
             }
@@ -63,7 +63,7 @@ namespace Assets.Scripts.Player.Gun
             if (Input.GetMouseButtonUp(0))
             {
                 isCharging = false;
-                currentBullet = ShootArrow(chargeTime);
+                ShootArrow(chargeTime);
                 shotPower.SetValue(0);
                 chargeTime = 0;
                 timeOfLastShot = Time.realtimeSinceStartup;
@@ -94,9 +94,8 @@ namespace Assets.Scripts.Player.Gun
         }
         private float GetFinalShotIntensity(float shotIntensity)
         {
-            float maxTimeRange = 1f;
             float minTimeRange = 0.2f;
-            float result = 0f;
+            float result;
             //max is 1, min is 0.001
             if (shotIntensity < minTimeRange)
                 result = minTimeRange / maxTimeRange;

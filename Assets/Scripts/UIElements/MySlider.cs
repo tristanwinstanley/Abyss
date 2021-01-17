@@ -11,6 +11,10 @@ namespace Assets.Scripts.UIElements
         {
             slider.maxValue = maxValue;
         }
+        public void SetMaxValue(float maxValue)
+        {
+            slider.maxValue = maxValue;
+        }
         public void SetValue(int value)
         {
             slider.value = value;

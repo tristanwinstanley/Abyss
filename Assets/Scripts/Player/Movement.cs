@@ -11,7 +11,7 @@ namespace Assets.Scripts.Player
         private Vector2 velocity;
         private float timeOfLastJump;
 
-        public int playerSpeed = 20;
+        private int playerSpeed = 40;
         public int jumpforce = 40;
         [SerializeField]
         private Collider2D bottomCollider;
