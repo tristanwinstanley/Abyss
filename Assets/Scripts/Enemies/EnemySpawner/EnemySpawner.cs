@@ -6,7 +6,7 @@ namespace Assets.Scripts.Enemies.EnemySpawner
 {
     public class EnemySpawner : MonoBehaviour
     {
-        [SerializeField] private GameObject sniperPrefab;
+        [SerializeField] private GameObject enemyPrefab;
         float timeSinceLastSpawn;
         List<GameObject> _currentEnemies;
         void Start()
@@ -19,10 +19,10 @@ namespace Assets.Scripts.Enemies.EnemySpawner
         {
             ClearDestroyedInstances();
 
-            //Spawn new enemy after 10s if fewer than 5
+            // Spawn new enemy after 10s if fewer than 5
             if (Time.realtimeSinceStartup - timeSinceLastSpawn > Constants.ENEMY_SPAWN_FREQUENCY && _currentEnemies.Count < 5)
             {
-                GameObject prefabInstance = Instantiate(sniperPrefab, this.transform.position, Quaternion.identity);
+                GameObject prefabInstance = Instantiate(enemyPrefab, this.transform.position, Quaternion.identity);
                 timeSinceLastSpawn = Time.realtimeSinceStartup;
                 _currentEnemies.Add(prefabInstance);
             }

@@ -16,7 +16,7 @@
         #endregion
 
         #region Health
-        public const int KAMI_HEALTH = 50;
+        public const int KAMI_HEALTH = 3;
         public const int MONSTER_HEALTH = 50;
         public const int PLAYER_HEALTH = 100;
         public const int ENEMY_SPAWNER_HEALTH = 10;
