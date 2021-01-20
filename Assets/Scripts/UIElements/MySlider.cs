@@ -19,6 +19,10 @@ namespace Assets.Scripts.UIElements
         {
             slider.value = value;
         }
+        public void SetValue(float value)
+        {
+            slider.value = value;
+        }
         public void AddValue(int value)
         {
             slider.value += value;

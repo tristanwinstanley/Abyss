@@ -17,7 +17,7 @@ namespace Assets.Scripts.Enemies.Diego
         {
             
             // Move left slowly
-            rb.velocity = new Vector2(-6, rb.velocity.y);
+            rb.velocity = new Vector2(-20, rb.velocity.y);
         }
     }
 

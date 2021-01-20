@@ -23,7 +23,7 @@
         #endregion
         #region Frequencies in second
         public const float ENEMY_SHOOT_FREQUENCY = 0.5f;
-        public const float ENEMY_SPAWN_FREQUENCY = 5f;
+        public const float ENEMY_SPAWN_FREQUENCY = 3f;
         #endregion
 
         #region Tags
@@ -32,6 +32,7 @@
         public const string ENEMY_BULLET_TAG = "EnemyBullet";
 
         public const string PLAYER_TAG = "Player";
+        public const string CASTLE_TAG = "Castle";
         public const string JUMP_CLD_TAG = "jump_cld";
         #endregion
 

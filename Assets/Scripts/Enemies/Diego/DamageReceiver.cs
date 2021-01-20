@@ -18,13 +18,16 @@ namespace Assets.Scripts.Enemies.Diego
         }
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            if (tag == "HeadCollider")
+            if (collision.tag == Constants.PLAYER_BULLET_TAG)
             {
-                health -= 10;
-            }
-            else if (tag == "BodyCollider")
-            {
-                health -= 2;
+                if (tag == "HeadCollider")
+                {
+                    health -= 10;
+                }
+                else if (tag == "BodyCollider")
+                {
+                    health -= 2;
+                }
             }
 
             _healthBar.SetValue(health);
