@@ -83,7 +83,6 @@ namespace Assets.Scripts.Player.Gun
             Vector2 spawnPosition = Blob.position + mouseVector2d.normalized * 8;
             GameObject projectile = Instantiate(arrowPrefab, spawnPosition, Quaternion.Euler(mouseAngle));
             projectile.tag = Constants.PLAYER_BULLET_TAG;
-            projectile.layer = Constants.ENEMY_LAYER;
             Rigidbody2D projectileRB = projectile.GetComponent<Rigidbody2D>();
             //Transform projectileTR = projectile.GetComponent<Transform>();
             shotIntensity = GetFinalShotIntensity(shotIntensity);

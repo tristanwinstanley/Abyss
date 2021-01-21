@@ -8,7 +8,7 @@
         public const float PL_MAX_DOWN_SPEED = 35;
 
         public const float BULLET_SPEED = 150;
-        public const float ENEMY_SPEED = 5;
+        public const float ENEMY_SPEED = 30;
         #endregion
 
         #region Lifetimes
