@@ -23,7 +23,8 @@
         #endregion
         #region Frequencies in second
         public const float ENEMY_SHOOT_FREQUENCY = 0.5f;
-        public const float ENEMY_SPAWN_FREQUENCY = 3f;
+        public const float KAMI_SPAWN_FREQUENCY = 3f;
+        public const float DIEGO_SPAWN_FREQUENCY = 5f;
         #endregion
 
         #region Tags
@@ -33,6 +34,8 @@
 
         public const string PLAYER_TAG = "Player";
         public const string CASTLE_TAG = "Castle";
+        public const string SPAWNER_TAG = "Spawner";
+        public const string ROUNDSTARTER_TAG = "RoundStarter";
         public const string JUMP_CLD_TAG = "jump_cld";
         #endregion
 
