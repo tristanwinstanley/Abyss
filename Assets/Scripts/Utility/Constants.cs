@@ -8,7 +8,7 @@
         public const float PL_MAX_DOWN_SPEED = 35;
 
         public const float BULLET_SPEED = 150;
-        public const float ENEMY_SPEED = 30;
+        public const float ENEMY_SPEED = 60;
         #endregion
 
         #region Lifetimes
@@ -36,6 +36,7 @@
         public const string CASTLE_TAG = "Castle";
         public const string SPAWNER_TAG = "Spawner";
         public const string ROUNDSTARTER_TAG = "RoundStarter";
+        public const string HINGE_TAG = "Hinge";
         public const string JUMP_CLD_TAG = "jump_cld";
         #endregion
 

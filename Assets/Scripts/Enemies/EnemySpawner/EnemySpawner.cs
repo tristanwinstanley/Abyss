@@ -54,8 +54,8 @@ namespace Assets.Scripts.Enemies.EnemySpawner
                 }
             }
 
-            // Show Start button when all enemies are dead
-            if (_currentEnemies.Count == 0)
+            // Show Start button when all enemies are dead and round time is over
+            if (timer >= currentRoundTime && _currentEnemies.Count == 0)
             {
                 roundStarter.SetActive(true);
             }

@@ -21,6 +21,7 @@ namespace Assets.Scripts.Player
             _collider = GetComponent<Collider2D>();
             _jumpCount = 0;
             timeOfLastJump = Time.realtimeSinceStartup;
+            
         }
         void Update()
         {
