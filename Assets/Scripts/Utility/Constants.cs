@@ -22,6 +22,11 @@
         public const int ENEMY_SPAWNER_HEALTH = 10;
         public const int CASTLE_HEALTH = 1000;
         #endregion
+
+        #region Damage
+        public const float ARROW_DAMAGE = 5;
+        #endregion
+
         #region Frequencies in second
         public const float ENEMY_SHOOT_FREQUENCY = 0.5f;
         public const float KAMI_SPAWN_FREQUENCY = 3f;

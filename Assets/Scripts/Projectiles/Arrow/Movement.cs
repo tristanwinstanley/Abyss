@@ -26,15 +26,12 @@ namespace Assets.Scripts.Projectiles.Arrow
 
         private void OnTriggerEnter2D(Collider2D col)
         {
-            BaseDamageReceiver damageReceiver = col.gameObject.GetComponent<BaseDamageReceiver>();
-            if (damageReceiver != null)
-            {
-                damageReceiver.TakeDamage(5);
-            }
-            
-            ArrowStick(col);
+            MakeArrowStick(col);
         }
-        void ArrowStick(Collider2D col)
+        /// <summary>
+        /// Make arrow follow target and stop it from interacting with other objects
+        /// </summary>
+        private void MakeArrowStick(Collider2D col)
         {
             _rb.velocity = Vector3.zero;
             // Make the arrow follow what it hits only if its an enemy
@@ -47,7 +44,6 @@ namespace Assets.Scripts.Projectiles.Arrow
             Destroy(_rb);
             Destroy(_cd);
         }
-
         private void RotateTowardsVelocity()
         {
             Vector3 velocity = new Vector3(_rb.velocity.x, _rb.velocity.y, 0);
