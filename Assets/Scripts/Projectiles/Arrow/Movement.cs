@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using Assets.Scripts.Utility;
 using Assets.Scripts.Player.Gun;
+using Assets.Scripts.Enemies.BaseEnemies;
 
 namespace Assets.Scripts.Projectiles.Arrow
 {
@@ -25,14 +26,23 @@ namespace Assets.Scripts.Projectiles.Arrow
 
         private void OnTriggerEnter2D(Collider2D col)
         {
-            //_rb.velocity = Vector3.zero;
-            ArrowStick();
+            BaseDamageReceiver damageReceiver = col.gameObject.GetComponent<BaseDamageReceiver>();
+            if (damageReceiver != null)
+            {
+                damageReceiver.TakeDamage(5);
+            }
+            
+            ArrowStick(col);
         }
-        void ArrowStick()
+        void ArrowStick(Collider2D col)
         {
             _rb.velocity = Vector3.zero;
-            // Make the arrow a child of the thing it's stuck to
-            //transform.parent = col.transform;
+            // Make the arrow follow what it hits only if its an enemy
+            if (col.gameObject.layer == Constants.ENEMY_LAYER)
+            {
+                transform.parent = col.transform;
+            }
+            
             //Destroy the arrow's rigidbody2D and collider2D
             Destroy(_rb);
             Destroy(_cd);

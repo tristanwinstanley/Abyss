@@ -1,4 +1,5 @@
 ﻿using Assets.Scripts.Castle;
+using Assets.Scripts.Enemies.BaseEnemies;
 using Assets.Scripts.UIElements;
 using Assets.Scripts.Utility;
 using UnityEngine;
@@ -16,7 +17,7 @@ namespace Assets.Scripts.Enemies.Diego
             if (transform.position.x < -15)
             {
                 GameObject castle = GameObject.FindWithTag(Constants.CASTLE_TAG);
-                castle.GetComponent<DamageController>().TakeDamage(0.5f);
+                castle.GetComponent<BaseDamageReceiver>().TakeDamage(0.5f);
             }
         }
     }

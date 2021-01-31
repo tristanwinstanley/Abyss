@@ -57,13 +57,32 @@ namespace Assets.Scripts.Player.Gun
             if (Input.GetMouseButtonUp(0))
             {
                 isCharging = false;
-                ShootArrow(chargeTime);
+                ShootArrowAtMouse(chargeTime);
                 shotPower.SetValue(0);
                 chargeTime = 0;
                 timeOfLastShot = Time.realtimeSinceStartup;
             }
         }
-        
+
+        public GameObject ShootArrowAtMouse(float shotIntensity)
+        {
+            //Vector between mouse and current position
+            Vector3 mouseVector = Camera.main.ScreenToWorldPoint(Input.mousePosition) - new Vector3(Blob.position.x, Blob.position.y, 0);
+            Vector2 mouseVector2d = new Vector2(mouseVector.x, mouseVector.y);
+            //Angle between mouse and right vector 0-360 deg
+            Vector3 mouseAngle = SelfRotation.ComputeTotalAngle(mouseVector2d, Vector3.right);
+
+            //Spawn projectile away from player to avoid collision issues
+            Vector2 spawnPosition = Blob.position + mouseVector2d.normalized * 8;
+            GameObject projectile = Instantiate(arrowPrefab, spawnPosition, Quaternion.Euler(mouseAngle));
+            projectile.tag = Constants.PLAYER_BULLET_TAG;
+            Rigidbody2D projectileRB = projectile.GetComponent<Rigidbody2D>();
+            shotIntensity = GetFinalShotIntensity(shotIntensity);
+            //Apply normalized velocity vector to bullet in direction of mouse
+            Utils.ApplyVelocity(projectileRB, mouseVector2d.normalized.x * shot_speed * shotIntensity, mouseVector2d.normalized.y * shot_speed * shotIntensity);
+            return projectile;
+        }
+
         public GameObject ShootArrow(float shotIntensity)
         {
             Vector3 shotAngle = Hinge.transform.rotation.eulerAngles;
@@ -71,7 +90,7 @@ namespace Assets.Scripts.Player.Gun
 
             // Shoot left when player is looking left
             if (transform.right.x == -1f)
-                shotVector = shotVector * new Vector2(-1, 1);
+                shotVector *= new Vector2(-1, 1);
             
             // Spawn arrow away from player to avoid collisions
             Vector2 spawnPosition = Blob.position + shotVector * 8;

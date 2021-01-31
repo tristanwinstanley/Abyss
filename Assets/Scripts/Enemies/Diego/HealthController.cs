@@ -5,19 +5,20 @@ using UnityEngine;
 
 namespace Assets.Scripts.Enemies.Diego
 {
-    public class DamageReceiver : BaseDamageReceiver
+    public class HealthController : BaseHealthController
     {
-        private void Awake()
-        {
-            
-        }
+        public MySlider _healthBar;
         new void Start()
         {
             base.Start();
+            _health = Constants.DIEGO_HEALTH;
+            _healthBar.SetMaxValue(_health);
+            _healthBar.SetValue(_health);
         }
         new void Update()
         {
-
+            _healthBar.SetValue(_health);
+            base.Update();
         }
 
     }

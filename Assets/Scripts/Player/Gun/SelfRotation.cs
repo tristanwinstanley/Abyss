@@ -13,7 +13,7 @@ namespace Assets.Scripts.Player.Gun
         {
             _transform = GetComponent<Transform>();
             // Hide mouse cursor
-            Cursor.visible = false;
+            Cursor.visible = true;
         }
         private void Update()
         {
@@ -21,7 +21,13 @@ namespace Assets.Scripts.Player.Gun
         }
         void FixedUpdate()
         {
-            
+            RotateTowardsMouse();
+        }
+        /// <summary>
+        /// Move aiming line towards Mouse exact location
+        /// </summary>
+        private void RotateTowardsMouse()
+        {
             //Vector between mouse and current position
             _mouseVector = Camera.main.ScreenToWorldPoint(Input.mousePosition) - _transform.position;
 
@@ -29,7 +35,14 @@ namespace Assets.Scripts.Player.Gun
             Vector3 mouseAngle = ComputeTotalAngle(_mouseVector, Vector3.right);
 
             //Rotate by setting angle to match mouse angle
-            //_transform.eulerAngles = mouseAngle;
+            _transform.eulerAngles = mouseAngle;
+        }
+
+        /// <summary>
+        /// Move aiming line when mouse is moved up and down
+        /// </summary>
+        private void RotateWithoutMouse()
+        {
             MouseDelta = Input.GetAxis("Mouse Y");
             Vector3 angleToRotate = new Vector3(0, 0, MouseDelta * testValue);
             _transform.Rotate(angleToRotate);

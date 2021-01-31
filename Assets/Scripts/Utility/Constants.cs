@@ -17,9 +17,10 @@
 
         #region Health
         public const int KAMI_HEALTH = 3;
-        public const int MONSTER_HEALTH = 50;
+        public const int DIEGO_HEALTH = 50;
         public const int PLAYER_HEALTH = 100;
         public const int ENEMY_SPAWNER_HEALTH = 10;
+        public const int CASTLE_HEALTH = 1000;
         #endregion
         #region Frequencies in second
         public const float ENEMY_SHOOT_FREQUENCY = 0.5f;

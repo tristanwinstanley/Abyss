@@ -11,7 +11,7 @@ namespace Assets.Scripts.Enemies.Sniper
         public MySlider _healthBar;
         void Start()
         {
-            health = Constants.MONSTER_HEALTH;
+            health = Constants.KAMI_HEALTH;
             _healthBar.SetMaxValue(health);
         }
         private void OnTriggerEnter2D(Collider2D collision)
