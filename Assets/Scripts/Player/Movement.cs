@@ -11,10 +11,8 @@ namespace Assets.Scripts.Player
         private Vector2 velocity;
         private float timeOfLastJump;
 
-        private int playerSpeed = 40;
+        private int playerSpeed = 80;
         public int jumpforce = 40;
-        [SerializeField]
-        private Collider2D bottomCollider;
         void Start()
         {
             Blob = GetComponent<Rigidbody2D>();
@@ -40,7 +38,7 @@ namespace Assets.Scripts.Player
             // Make sprite look left and right
             if (HorizontalAx != 0 && transform.right.x != HorizontalAx)
             {
-                transform.Rotate(0, 180, 0);
+                //transform.Rotate(0, 180, 0);
             }
 
             //Jump every 0.2s

@@ -17,7 +17,7 @@
 
         #region Health
         public const int KAMI_HEALTH = 3;
-        public const int DIEGO_HEALTH = 50;
+        public const int DIEGO_HEALTH = 30;
         public const int PLAYER_HEALTH = 100;
         public const int ENEMY_SPAWNER_HEALTH = 10;
         public const int CASTLE_HEALTH = 1000;
@@ -37,6 +37,7 @@
         public const string ENEMY_TAG = "Enemy";
         public const string PLAYER_BULLET_TAG = "PlayerBullet";
         public const string ENEMY_BULLET_TAG = "EnemyBullet";
+        public const string CAMERA_TAG = "MainCamera";
 
         public const string PLAYER_TAG = "Player";
         public const string CASTLE_TAG = "Castle";
