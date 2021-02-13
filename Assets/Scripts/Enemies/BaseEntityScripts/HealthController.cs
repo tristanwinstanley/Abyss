@@ -1,21 +1,26 @@
-﻿using UnityEngine;
+﻿using Assets.Scripts.UIElements;
+using UnityEngine;
 
-namespace Assets.Scripts.Enemies.BaseEnemies
+namespace Assets.Scripts.Enemies.BaseEntityScripts
 {
-    public class BaseHealthController : MonoBehaviour
+    public class HealthController : MonoBehaviour
     {
-        protected float _health;
-        
+        public float Health;
+        public MySlider HealthBar;
+
         #region Unity Methods
         protected void Start()
         {
-            
+            HealthBar.SetMaxValue(Health);
+            HealthBar.SetValue(Health);
         }
 
         protected void Update()
         {
-            if (_health <= 0)
+            HealthBar.SetValue(Health);
+            if (Health <= 0)
                 Destroy(gameObject);
+
         }
         #endregion
 
@@ -25,7 +30,7 @@ namespace Assets.Scripts.Enemies.BaseEnemies
         /// </summary>
         public void AddToHealth(float value)
         {
-            _health += value;
+            Health += value;
         }
         #endregion
 

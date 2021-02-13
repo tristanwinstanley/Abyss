@@ -2,7 +2,7 @@
 using UnityEngine;
 namespace Assets.Scripts.Enemies.ShieldedKami
 {
-    public class Movement : MonoBehaviour
+    public class SKamiMovement : MonoBehaviour
     {
         // Start is called before the first frame update
         Rigidbody2D rb;

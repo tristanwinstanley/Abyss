@@ -1,7 +1,6 @@
-﻿using UnityEngine;
+﻿using Assets.Scripts.Player.Gun;
 using Assets.Scripts.Utility;
-using Assets.Scripts.Player.Gun;
-using Assets.Scripts.Enemies.BaseEnemies;
+using UnityEngine;
 
 namespace Assets.Scripts.Projectiles.Arrow
 {

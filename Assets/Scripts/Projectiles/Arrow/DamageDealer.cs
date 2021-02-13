@@ -1,4 +1,4 @@
-﻿using Assets.Scripts.Enemies.BaseEnemies;
+﻿using Assets.Scripts.Enemies.BaseEntityScripts;
 using Assets.Scripts.Utility;
 using UnityEngine;
 
@@ -15,7 +15,7 @@ namespace Assets.Scripts.Projectiles.Arrow
         
         private void InflictDamage(Collider2D col)
         {
-            BaseDamageReceiver damageReceiver = col.gameObject.GetComponent<BaseDamageReceiver>();
+            DamageReceiver damageReceiver = col.gameObject.GetComponent<DamageReceiver>();
             if (damageReceiver != null)
             {
                 damageReceiver.TakeDamage(DamagePercentage * Constants.ARROW_DAMAGE);

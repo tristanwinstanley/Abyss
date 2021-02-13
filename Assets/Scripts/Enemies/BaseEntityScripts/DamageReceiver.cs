@@ -1,18 +1,18 @@
 ﻿using UnityEngine;
 using System;
 
-namespace Assets.Scripts.Enemies.BaseEnemies
+namespace Assets.Scripts.Enemies.BaseEntityScripts
 {
-    public class BaseDamageReceiver : MonoBehaviour
+    public class DamageReceiver : MonoBehaviour
     {
-        private BaseHealthController _healthController;
+        private HealthController _healthController;
 
         #region Unity Methods
         protected void Start()
         {
             // Find BaseHealthController attached to transform of root gameObject
             // Use root so that this damage receiver can be anywhere on the tree of gameObjects
-            _healthController = transform.root.GetComponent<BaseHealthController>();
+            _healthController = transform.root.GetComponent<HealthController>();
         }
 
         protected void Update()

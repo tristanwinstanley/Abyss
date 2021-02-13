@@ -1,12 +1,11 @@
-﻿using Assets.Scripts.Utility;
-using UnityEngine;
-namespace Assets.Scripts.Enemies.Diego
+﻿using UnityEngine;
+namespace Assets.Scripts.Enemies.BaseEntityScripts
 {
     public class Movement : MonoBehaviour
     {
+        public int Speed;
         Rigidbody2D rb;
-        float previousDirection;
-        SpriteRenderer spriteRenderer;
+        
         void Start()
         {
             rb = GetComponent<Rigidbody2D>();
@@ -17,7 +16,7 @@ namespace Assets.Scripts.Enemies.Diego
         {
             
             // Move left slowly
-            rb.velocity = new Vector2(-40, rb.velocity.y);
+            rb.velocity = new Vector2(-Speed, rb.velocity.y);
         }
     }
 
