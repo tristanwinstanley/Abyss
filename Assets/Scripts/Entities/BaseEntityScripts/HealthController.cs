@@ -11,16 +11,19 @@ namespace Assets.Scripts.Enemies.BaseEntityScripts
         #region Unity Methods
         protected void Start()
         {
-            HealthBar.SetMaxValue(Health);
-            HealthBar.SetValue(Health);
+            if (HealthBar != null)
+            {
+                HealthBar.SetMaxValue(Health);
+                HealthBar.SetValue(Health);
+            }
         }
 
         protected void Update()
         {
-            HealthBar.SetValue(Health);
+            if (HealthBar != null)
+                HealthBar.SetValue(Health);
             if (Health <= 0)
                 Destroy(gameObject);
-
         }
         #endregion
 

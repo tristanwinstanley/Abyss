@@ -10,9 +10,9 @@ namespace Assets.Scripts.Enemies.BaseEntityScripts
         #region Unity Methods
         protected void Start()
         {
-            // Find BaseHealthController attached to transform of root gameObject
+            // Find HealthController attached to current gameobject or root gameObject
             // Use root so that this damage receiver can be anywhere on the tree of gameObjects
-            _healthController = transform.root.GetComponent<HealthController>();
+            _healthController = gameObject.GetComponent<HealthController>() ?? transform.root.GetComponent<HealthController>();
         }
 
         protected void Update()

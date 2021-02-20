@@ -1,4 +1,5 @@
-﻿using Assets.Scripts.Projectiles.Arrow;
+﻿using Assets.Scripts.Enemies.BaseEntityScripts;
+using Assets.Scripts.Projectiles.Arrow;
 using Assets.Scripts.UIElements;
 using Assets.Scripts.Utility;
 using UnityEngine;
