@@ -24,31 +24,11 @@ namespace Assets.Scripts.Projectiles.Bullet
         }
         private void OnTriggerEnter2D(Collider2D otherCollider)
         {
-            GameObject player = GameObject.FindWithTag(Constants.PLAYER_TAG);
-            Rigidbody2D playerRB = player.GetComponent<Rigidbody2D>();
-            bool destroyCurrentGameObject = false;
-            switch (otherCollider.gameObject.tag)
+            if (otherCollider.gameObject.tag == Constants.PLAYER_TAG)
             {
-                case Constants.PLAYER_TAG:
-                    //destroyCurrentGameObject = true;
-                    collisionCount++;
-                    break;
-                case Constants.JUMP_CLD_TAG:
-                    Utils.ApplyVelocity(playerRB, y: 70);
-                    //destroyCurrentGameObject = true;
-                    break;
-                default:
-                    collisionCount++;
-                    break;
-
-            } 
-
-            //Destroy on second rebound
-            if (collisionCount > 5)
-                destroyCurrentGameObject = true;
-
-            if (destroyCurrentGameObject)
-                Destroy(this.gameObject);
+                Destroy(this);
+            }
+            
         }
     }
 }

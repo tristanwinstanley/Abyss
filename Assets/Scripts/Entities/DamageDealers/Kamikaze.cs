@@ -18,7 +18,7 @@ namespace Assets.Scripts.Entities.DamageDealers
         }
         public void Update()
         {
-            if (transform.position.x < -15)
+            if (transform.position.x < -80)
             {
                 SelfDestruct();
             }
