@@ -1,4 +1,5 @@
 ﻿using Assets.Scripts.UIElements;
+using Assets.Scripts.Utility;
 using UnityEngine;
 
 namespace Assets.Scripts.Enemies.BaseEntityScripts
@@ -6,11 +7,13 @@ namespace Assets.Scripts.Enemies.BaseEntityScripts
     public class HealthController : MonoBehaviour
     {
         public float Health;
+        private GameObject player;
         public MySlider HealthBar;
 
         #region Unity Methods
         protected void Start()
         {
+            player = GameObject.FindWithTag("Player");
             if (HealthBar != null)
             {
                 HealthBar.SetMaxValue(Health);
@@ -23,7 +26,7 @@ namespace Assets.Scripts.Enemies.BaseEntityScripts
             if (HealthBar != null)
                 HealthBar.SetValue(Health);
             if (Health <= 0)
-                Destroy(gameObject);
+                Die();
         }
         #endregion
 
@@ -34,6 +37,21 @@ namespace Assets.Scripts.Enemies.BaseEntityScripts
         public void AddToHealth(float value)
         {
             Health += value;
+        }
+
+        private void Die()
+        {
+            if (gameObject.layer == Constants.ENEMY_LAYER)
+            {
+                GameObject player = GameObject.FindWithTag("Player");
+                
+                ExperienceController xpController = player.GetComponent<ExperienceController>();
+                if (xpController != null)
+                {
+                    xpController.AddExperience(1);
+                }
+            }
+            Destroy(gameObject);
         }
         #endregion
 
