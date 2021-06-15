@@ -6,19 +6,16 @@ namespace Assets.Scripts.Castle
 {
     public class CastleHealthController : HealthController
     {
-        //public MySlider _healthBar;
-        //public float Health;
-
         new void Start()
         {
             base.Start();
         }
         new void Update()
         {
-            HealthBar.SetValue(Health);
+            HealthBar.SetValue(health);
 
             //Kill when zero health
-            if (Health == 0)
+            if (health == 0)
             {
                 //end game
             }

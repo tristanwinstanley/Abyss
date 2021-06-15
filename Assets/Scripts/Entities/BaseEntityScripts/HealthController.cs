@@ -6,7 +6,7 @@ namespace Assets.Scripts.Enemies.BaseEntityScripts
 {
     public class HealthController : MonoBehaviour
     {
-        public float Health;
+        protected float health;
         private GameObject player;
         public MySlider HealthBar;
 
@@ -16,16 +16,16 @@ namespace Assets.Scripts.Enemies.BaseEntityScripts
             player = GameObject.FindWithTag("Player");
             if (HealthBar != null)
             {
-                HealthBar.SetMaxValue(Health);
-                HealthBar.SetValue(Health);
+                HealthBar.SetMaxValue(health);
+                HealthBar.SetValue(health);
             }
         }
 
         protected void Update()
         {
             if (HealthBar != null)
-                HealthBar.SetValue(Health);
-            if (Health <= 0)
+                HealthBar.SetValue(health);
+            if (health <= 0)
                 Die();
         }
         #endregion
@@ -36,7 +36,7 @@ namespace Assets.Scripts.Enemies.BaseEntityScripts
         /// </summary>
         public void AddToHealth(float value)
         {
-            Health += value;
+            health += value;
         }
 
         private void Die()
