@@ -10,15 +10,15 @@ namespace Assets.Scripts.Player.Gun
     {
         [SerializeField] private GameObject bulletPrefab;
         [SerializeField] private GameObject arrowPrefab;
-        public MySlider shotPower;
+        [SerializeField] private MySlider shotPower;
+        [SerializeField] private bool isCharging;
+        [SerializeField] private int shot_speed;
         private Rigidbody2D Blob;
         private float timeOfLastShot;
         private GameObject currentBullet;
-        public bool isCharging;
         private float chargeTime;
-        public int shot_speed;
         private float maxTimeRange;
-        private GameObject Hinge;
+        private GameObject hinge;
         private bool shootAtMouse = true;
         void Start()
         {
@@ -29,7 +29,7 @@ namespace Assets.Scripts.Player.Gun
             maxTimeRange = 0.75f;
             shotPower.SetMaxValue(maxTimeRange);
             shotPower.SetValue(0);
-            Hinge = GameObject.FindWithTag(Constants.HINGE_TAG);
+            hinge = GameObject.FindWithTag(Constants.HINGE_TAG);
         }
 
         // Update is called once per frame
@@ -98,7 +98,7 @@ namespace Assets.Scripts.Player.Gun
             }
             else
             {
-                shotVector = SelfRotation.DegreeToVector2(Hinge.transform.rotation.eulerAngles.z);
+                shotVector = SelfRotation.DegreeToVector2(hinge.transform.rotation.eulerAngles.z);
                 // Shoot left when player is looking left
                 if (transform.right.x == -1f)
                     shotVector *= new Vector2(-1, 1);
@@ -117,7 +117,7 @@ namespace Assets.Scripts.Player.Gun
             }
             else
             {
-                shotAngle = Hinge.transform.rotation.eulerAngles;
+                shotAngle = hinge.transform.rotation.eulerAngles;
             }
 
             return shotAngle;

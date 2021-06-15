@@ -5,8 +5,8 @@ namespace Assets.Scripts.Enemies.ShieldedKami
     public class SKamiMovement : MonoBehaviour
     {
         // Start is called before the first frame update
-        Rigidbody2D rb;
-        Animator animator;
+        private Rigidbody2D rb;
+        private Animator animator;
         void Start()
         {
             rb = GetComponent<Rigidbody2D>();

@@ -5,7 +5,6 @@ namespace Assets.Scripts.Enemies.BaseEntityScripts
 {
     public class DamageDealer: MonoBehaviour
     {
-        
         public float Damage;
         public float DamagePercentage { get; set; }
         public void Awake()

@@ -5,9 +5,9 @@ namespace Assets.Scripts.Projectiles.Bullet
 {
     public class Despawn : MonoBehaviour
     {
-        float timezero;
-        int currentLayer;
-        int collisionCount;
+        private float timezero;
+        private int currentLayer;
+        private int collisionCount;
         // Start is called before the first frame update
         void Start()
         {

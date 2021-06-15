@@ -5,14 +5,14 @@ namespace Assets.Scripts.Enemies.BaseEntityScripts
 {
     public class DamageReceiver : MonoBehaviour
     {
-        private HealthController _healthController;
+        private HealthController healthController;
 
         #region Unity Methods
         protected void Start()
         {
             // Find HealthController attached to current gameobject or root gameObject
             // Use root so that this damage receiver can be anywhere on the tree of gameObjects
-            _healthController = gameObject.GetComponent<HealthController>() ?? transform.root.GetComponent<HealthController>();
+            healthController = gameObject.GetComponent<HealthController>() ?? transform.root.GetComponent<HealthController>();
         }
 
         protected void Update()
@@ -30,9 +30,9 @@ namespace Assets.Scripts.Enemies.BaseEntityScripts
         {
             // Take triple damage on headshot
             if (tag == "HeadCollider")
-                _healthController.AddToHealth(-damage * 3);
+                healthController.AddToHealth(-damage * 3);
             else
-                _healthController.AddToHealth(-damage);
+                healthController.AddToHealth(-damage);
         }
         #endregion
 

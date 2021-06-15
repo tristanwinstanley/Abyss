@@ -4,12 +4,12 @@ namespace Assets.Scripts.Enemies.Sniper
 {
     public class AutoShoot : MonoBehaviour
     {
-        Transform CurrentTransform;
+        Transform currentTransform;
         [SerializeField] private GameObject projectilePrefab;
         float timeSinceLastShot;
         void Start()
         {
-            CurrentTransform = GetComponent<Transform>();
+            currentTransform = GetComponent<Transform>();
             timeSinceLastShot = Time.realtimeSinceStartup;
         }
 
@@ -21,7 +21,7 @@ namespace Assets.Scripts.Enemies.Sniper
             {
                 timeSinceLastShot = Time.realtimeSinceStartup;
                 //Normalized vector between Current transform and player
-                Vector2 projectileVelocityVector = Utils.Get2DNormVector(GameObject.FindWithTag(Constants.PLAYER_TAG).transform.position - CurrentTransform.position);
+                Vector2 projectileVelocityVector = Utils.Get2DNormVector(GameObject.FindWithTag(Constants.PLAYER_TAG).transform.position - currentTransform.position);
                 //Shoot projectile from current position with specific direction and speed
                 Shoot(transform.position, projectileVelocityVector * Constants.BULLET_SPEED);
             }

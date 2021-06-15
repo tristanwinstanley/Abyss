@@ -4,10 +4,10 @@ namespace Assets.Scripts.Player
 {
     public class Movement : MonoBehaviour
     {
-        private Rigidbody2D Blob;
-        private int _jumpCount;
-        public bool _grounded;
-        private Collider2D _collider;
+        private Rigidbody2D blob;
+        private int jumpCount;
+        public bool grounded;
+        private Collider2D collider;
         private Vector2 velocity;
         private float timeOfLastJump;
 
@@ -15,15 +15,15 @@ namespace Assets.Scripts.Player
         public int jumpforce = 40;
         void Start()
         {
-            Blob = GetComponent<Rigidbody2D>();
-            _collider = GetComponent<Collider2D>();
-            _jumpCount = 0;
+            blob = GetComponent<Rigidbody2D>();
+            collider = GetComponent<Collider2D>();
+            jumpCount = 0;
             timeOfLastJump = Time.realtimeSinceStartup;
             
         }
         void Update()
         {
-            velocity = Blob.velocity;
+            velocity = blob.velocity;
 
             //Get User input
             float HorizontalAx = Input.GetAxisRaw("Horizontal");
@@ -32,7 +32,7 @@ namespace Assets.Scripts.Player
             //Horizontal Move
             if (HorizontalAx != 0)
             {
-                Utils.ApplyVelocity(Blob, HorizontalAx * playerSpeed, velocity.y);
+                Utils.ApplyVelocity(blob, HorizontalAx * playerSpeed, velocity.y);
             }
 
             // Make sprite look left and right
@@ -45,10 +45,10 @@ namespace Assets.Scripts.Player
             float currentTime = Time.realtimeSinceStartup;
             if (Input.GetKeyDown("space") && currentTime - timeOfLastJump > 0.2f)
             {
-                if (_grounded || _jumpCount == 1)
+                if (grounded || jumpCount == 1)
                 {
-                    Utils.ApplyVelocity(Blob, y: jumpforce);
-                    _jumpCount++;
+                    Utils.ApplyVelocity(blob, y: jumpforce);
+                    jumpCount++;
                 }
 
                 //Reset timer
@@ -61,25 +61,25 @@ namespace Assets.Scripts.Player
 
         private void CapVerticalPlayerSpeed()
         {
-            if (Blob.velocity.y > Constants.PL_MAX_UP_SPEED)
-                Utils.ApplyVelocity(Blob, y: Constants.PL_MAX_UP_SPEED);
-            else if (Blob.velocity.y < -Constants.PL_MAX_DOWN_SPEED)
-                Utils.ApplyVelocity(Blob, x: Blob.velocity.x, y: -Constants.PL_MAX_DOWN_SPEED);
+            if (blob.velocity.y > Constants.PL_MAX_UP_SPEED)
+                Utils.ApplyVelocity(blob, y: Constants.PL_MAX_UP_SPEED);
+            else if (blob.velocity.y < -Constants.PL_MAX_DOWN_SPEED)
+                Utils.ApplyVelocity(blob, x: blob.velocity.x, y: -Constants.PL_MAX_DOWN_SPEED);
 
         }
         void OnCollisionEnter2D(Collision2D collision)
         {    
             if (collision.gameObject.tag == "Floor")
             {
-                _grounded = true;
-                _jumpCount = 0;
+                grounded = true;
+                jumpCount = 0;
             }
         }
         void OnCollisionExit2D(Collision2D collision)
         {
             if (collision.gameObject.tag == "Floor")
             {
-                _grounded = false;
+                grounded = false;
             }
         }
     }

@@ -7,10 +7,10 @@ namespace Assets.Scripts.Player
 {
     public class DamageController : MonoBehaviour
     {
+        public MySlider healthBar;
         private Rigidbody2D bulletRB;
         private Transform bulletTransform;
-        public int currentHealth;
-        public MySlider healthBar;
+        private int currentHealth;
         int currentLayer;
 
         // Start is called before the first frame update

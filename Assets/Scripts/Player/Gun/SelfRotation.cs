@@ -4,14 +4,14 @@ namespace Assets.Scripts.Player.Gun
 {
     public class SelfRotation : MonoBehaviour
     {
-        private Transform _transform;
-        public Vector3 _mouseVector;
-        private Vector3 _stickParentVector;
-        public float MouseDelta;
-        public float testValue;
+        private Vector3 mouseVector;
+        private Transform transform;
+        private Vector3 stickParentVector;
+        private float MouseDelta;
+        private float testValue;
         void Start()
         {
-            _transform = GetComponent<Transform>();
+            transform = GetComponent<Transform>();
             // Hide mouse cursor
             Cursor.visible = true;
         }
@@ -29,13 +29,13 @@ namespace Assets.Scripts.Player.Gun
         private void RotateTowardsMouse()
         {
             //Vector between mouse and current position
-            _mouseVector = Camera.main.ScreenToWorldPoint(Input.mousePosition) - _transform.position;
+            mouseVector = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
 
             //Angle between mouse and right vector (0, 0, 0-360 deg)
-            Vector3 mouseAngle = ComputeTotalAngle(_mouseVector, Vector3.right);
+            Vector3 mouseAngle = ComputeTotalAngle(mouseVector, Vector3.right);
 
             //Rotate by setting angle to match mouse angle
-            _transform.eulerAngles = mouseAngle;
+            transform.eulerAngles = mouseAngle;
         }
 
         /// <summary>
@@ -45,7 +45,7 @@ namespace Assets.Scripts.Player.Gun
         {
             MouseDelta = Input.GetAxis("Mouse Y");
             Vector3 angleToRotate = new Vector3(0, 0, MouseDelta * testValue);
-            _transform.Rotate(angleToRotate);
+            transform.Rotate(angleToRotate);
         }
         public static Vector3 ComputeTotalAngle(Vector3 a, Vector3 b)
         {
@@ -80,7 +80,7 @@ namespace Assets.Scripts.Player.Gun
         private Vector3 GetVectorWithParent(Vector3 inputPosition)
         {
             //Return vector between input position and parent position
-            return inputPosition - _transform.parent.position;
+            return inputPosition - transform.parent.position;
         }
 
     }

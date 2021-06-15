@@ -11,8 +11,8 @@ namespace Assets.Scripts.Enemies.GiantBomber
 {
     public class Bomber : MonoBehaviour
     {
-        public GameObject ProjectilePrefab;
-        float timer;
+        private GameObject projectilePrefab;
+        private float timer;
         private void Start()
         {
             timer = 0;
@@ -32,7 +32,7 @@ namespace Assets.Scripts.Enemies.GiantBomber
 
 
             // Spawn arrow
-            GameObject projectile = Instantiate(ProjectilePrefab, transform.position, Quaternion.Euler(shotAngle));
+            GameObject projectile = Instantiate(projectilePrefab, transform.position, Quaternion.Euler(shotAngle));
 
             // Set damage of arrow
             //DamageDealer damageDealer = projectile.GetComponent<DamageDealer>();

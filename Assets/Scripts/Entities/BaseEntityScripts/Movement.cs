@@ -3,8 +3,9 @@ namespace Assets.Scripts.Enemies.BaseEntityScripts
 {
     public class Movement : MonoBehaviour
     {
-        public int Speed;
-        Rigidbody2D rb;
+        [SerializeField]
+        private int speed;
+        private Rigidbody2D rb;
         
         void Start()
         {
@@ -14,9 +15,8 @@ namespace Assets.Scripts.Enemies.BaseEntityScripts
         // Update is called once per frame
         void Update()
         {
-            
             // Move left slowly
-            rb.velocity = new Vector2(-Speed, rb.velocity.y);
+            rb.velocity = new Vector2(-speed, rb.velocity.y);
         }
     }
 

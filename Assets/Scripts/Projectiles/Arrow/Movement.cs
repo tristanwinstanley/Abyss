@@ -6,18 +6,16 @@ namespace Assets.Scripts.Projectiles.Arrow
 {
     public class Movement : MonoBehaviour
     {
-        Rigidbody2D _rb;
-        Transform _transform;
-        BoxCollider2D _cd;
+        Rigidbody2D rb;
+        BoxCollider2D cd;
         private void Start()
         {
-            _rb = GetComponent<Rigidbody2D>();
-            _transform = GetComponent<Transform>();
-            _cd = GetComponent<BoxCollider2D>();
+            rb = GetComponent<Rigidbody2D>();
+            cd = GetComponent<BoxCollider2D>();
         }
         private void FixedUpdate()
         {
-            if (_rb != null)
+            if (rb != null)
             {
                 RotateTowardsVelocity();
             }
@@ -32,7 +30,7 @@ namespace Assets.Scripts.Projectiles.Arrow
         /// </summary>
         private void MakeArrowStick(Collider2D col)
         {
-            _rb.velocity = Vector3.zero;
+            rb.velocity = Vector3.zero;
             // Make the arrow follow what it hits only if its an enemy
             if (col.gameObject.layer == Constants.ENEMY_LAYER)
             {
@@ -40,14 +38,14 @@ namespace Assets.Scripts.Projectiles.Arrow
             }
             
             //Destroy the arrow's rigidbody2D and collider2D
-            Destroy(_rb);
-            Destroy(_cd);
+            Destroy(rb);
+            Destroy(cd);
         }
         private void RotateTowardsVelocity()
         {
-            Vector3 velocity = new Vector3(_rb.velocity.x, _rb.velocity.y, 0);
+            Vector3 velocity = new Vector3(rb.velocity.x, rb.velocity.y, 0);
             Vector3 angle = SelfRotation.ComputeTotalAngle(velocity, Vector3.right);
-            _transform.eulerAngles = angle;
+            transform.eulerAngles = angle;
         }
     }
 }

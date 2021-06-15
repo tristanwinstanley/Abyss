@@ -6,7 +6,7 @@ namespace Assets.Scripts.Enemies.BaseEntityScripts
 {
     public class HealthController : MonoBehaviour
     {
-        protected float health;
+        [SerializeField] protected float health;
         private GameObject player;
         public MySlider HealthBar;
 

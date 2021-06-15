@@ -8,24 +8,24 @@ namespace Assets.Scripts.Enemies.EnemySpawner
     {
         [SerializeField] private GameObject kamiPrefab;
         [SerializeField] private GameObject diegoPrefab;
+        [SerializeField] private bool canSpawn { get; set; }
         private float timeSinceLastKami;
         private float timeSinceLastDiego;
-        private List<GameObject> _currentEnemies;
+        private List<GameObject> currentEnemies;
         private int currentRound;
         private float currentRoundTime;
         private float timer;
         private GameObject roundStarter;
-
-        public bool CanSpawn { get; set; }
+        
         void Start()
         {
-            _currentEnemies = new List<GameObject>();
+            currentEnemies = new List<GameObject>();
             roundStarter = GameObject.FindWithTag(Constants.ROUNDSTARTER_TAG);
         }
 
         public void StartRound()
         {
-            CanSpawn = true;
+            canSpawn = true;
             currentRound++;
             currentRoundTime = GetRoundTime(currentRound);
             timer = 0;
@@ -35,7 +35,7 @@ namespace Assets.Scripts.Enemies.EnemySpawner
         void Update()
         {
             ClearDestroyedInstances();
-            if (CanSpawn)
+            if (canSpawn)
             {
                 timer += Time.deltaTime;
                 if (timer <= currentRoundTime)
@@ -44,18 +44,18 @@ namespace Assets.Scripts.Enemies.EnemySpawner
                     foreach (GameObject prefab in enemyPrefab)
                     {
                         GameObject prefabInstance = Instantiate(prefab, this.transform.position, Quaternion.identity);
-                        _currentEnemies.Add(prefabInstance);
+                        currentEnemies.Add(prefabInstance);
                     }
                 }
                 else
                 {
                     // End of round
-                    CanSpawn = false;
+                    canSpawn = false;
                 }
             }
 
             // Show Start button when all enemies are dead and round time is over
-            if (timer >= currentRoundTime && _currentEnemies.Count == 0)
+            if (timer >= currentRoundTime && currentEnemies.Count == 0)
             {
                 roundStarter.SetActive(true);
             }
@@ -83,7 +83,7 @@ namespace Assets.Scripts.Enemies.EnemySpawner
         }
         private void ClearDestroyedInstances()
         {
-            _currentEnemies.RemoveAll(x => x == null);
+            currentEnemies.RemoveAll(x => x == null);
         }
 
         private List<GameObject> GetNextPrefabsToSpawn()
