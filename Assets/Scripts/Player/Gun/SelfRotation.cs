@@ -5,13 +5,11 @@ namespace Assets.Scripts.Player.Gun
     public class SelfRotation : MonoBehaviour
     {
         private Vector3 mouseVector;
-        private Transform transform;
         private Vector3 stickParentVector;
         private float MouseDelta;
         private float testValue;
         void Start()
         {
-            transform = GetComponent<Transform>();
             // Hide mouse cursor
             Cursor.visible = true;
         }

@@ -11,7 +11,7 @@ namespace Assets.Scripts.Enemies.GiantBomber
 {
     public class Bomber : MonoBehaviour
     {
-        private GameObject projectilePrefab;
+        [SerializeField] private GameObject projectilePrefab;
         private float timer;
         private void Start()
         {

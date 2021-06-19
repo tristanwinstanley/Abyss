@@ -1,25 +1,25 @@
-﻿using Assets.Scripts.Utility;
+﻿using Assets.Scripts.Entities.BaseEntityScripts;
+using Assets.Scripts.Utility;
 using UnityEngine;
 namespace Assets.Scripts.Player
 {
     public class Movement : MonoBehaviour
     {
+        public bool grounded;
+        public int jumpforce = 40;
         private Rigidbody2D blob;
         private int jumpCount;
-        public bool grounded;
-        private Collider2D collider;
         private Vector2 velocity;
         private float timeOfLastJump;
-
-        private int playerSpeed = 80;
-        public int jumpforce = 40;
+        private int playerSpeed;
+        private EntityData entityData;
         void Start()
         {
+            entityData = GetComponent<EntityData>();
             blob = GetComponent<Rigidbody2D>();
-            collider = GetComponent<Collider2D>();
             jumpCount = 0;
             timeOfLastJump = Time.realtimeSinceStartup;
-            
+            playerSpeed = entityData.entitySO.Speed;
         }
         void Update()
         {

@@ -10,6 +10,6 @@ namespace Assets.Scripts.Entities.BaseEntityScripts
 {
     public class EntityData : MonoBehaviour
     {
-        [SerializeField] private EntitySO entitySO;
+        [SerializeField] public EntitySO entitySO;
     }
 }

@@ -28,7 +28,7 @@ namespace Assets.Scripts.Entities.DamageDealers
         /// </summary>
         private void SelfDestruct()
         {
-            InflictDamage(castle, Damage);
+            InflictDamage(castle);
             Destroy(gameObject);
         }
     }

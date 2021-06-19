@@ -8,7 +8,7 @@ namespace Assets.Scripts.Entities.DamageDealers
     {
         private void OnTriggerEnter2D(Collider2D col)
         {
-            InflictDamage(col.gameObject, Damage);
+            InflictDamage(col.gameObject);
             Destroy(gameObject);
         }
     }

@@ -12,10 +12,10 @@ namespace Assets.Scripts.Castle
         }
         new void Update()
         {
-            HealthBar.SetValue(health);
+            HealthBar.SetValue(Health);
 
             //Kill when zero health
-            if (health == 0)
+            if (Health == 0)
             {
                 //end game
             }
