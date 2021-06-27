@@ -5,10 +5,10 @@ namespace Assets.Scripts.Enemies.BaseEntityScripts
 {
     public class ExperienceController : MonoBehaviour
     {
-        [SerializeField]
-        private int experience;
-        [SerializeField]
-        private float level;
+        [SerializeField] public int SkillPoints { get; protected set; }
+        [SerializeField] protected int level;
+        [SerializeField] private int experience;
+        [SerializeField] private int experienceCap = 10; // harcoding to 10 for now, will need a dynamic experience cap in the future
         #region Special methods
         private void Awake()
         {
@@ -17,18 +17,22 @@ namespace Assets.Scripts.Enemies.BaseEntityScripts
         }
         private void Update()
         {
-            LevelUp();
+            CheckExperience();
         }
         #endregion
 
-        #region private methods
-        private void LevelUp()
+        #region private/protected methods
+        private void CheckExperience()
         {
-            if (experience >= 10)
+            if (experience >= experienceCap)
             {
-                level++;
+                LevelUp();
                 experience = 0;
             }
+        }
+        protected virtual void LevelUp()
+        {
+            level++;
         }
         #endregion
 
